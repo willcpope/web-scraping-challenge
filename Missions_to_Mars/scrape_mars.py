@@ -29,7 +29,7 @@ def scrape():
     featured_img_url = browser.find_by_css('.main_image').first['src']
     data['image_url'] = featured_img_url
 
-    # Scrape Twitter Data
+    #Scrape Twitter Data
     tweets = 'https://twitter.com/marswxreport?lang=en'
     response = requests.get(tweets)
     tweet_soup = BeautifulSoup(response.text, 'lxml')
@@ -40,7 +40,7 @@ def scrape():
             data['tweet'] = i.text
             break
     
-    # Scrape Facts Data
+    #Scrape Facts Data
     facts = 'https://space-facts.com/mars/'
     facts_html = pd.read_html(facts)
     facts_df = facts_html[0]
@@ -50,7 +50,7 @@ def scrape():
     html_table = html_table.replace('\n', '')
     data['table_html'] = html_table
 
-    # Scrape Hemisphere Data
+    #Scrape Hemisphere Data
     hemis = 'https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars'
     executable_path = {'executable_path': '/usr/local/bin/chromedriver'}
     browser = Browser('chrome', **executable_path, headless=False)
